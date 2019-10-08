@@ -27,6 +27,7 @@ function(d)
 {
     drawPlanets(d);
     planetNames(d);
+    makeTable(d);
     console.log("works", d);
     
 },
@@ -63,4 +64,8 @@ var planetNames = function (d) {
 
     
 };
-                      
+
+var makeTable = function (d){
+    d3.select("#C1").append("table").attr("id", "elementTable");
+    d3.select("#elementTable").selectAll("tr").data(d).enter().append("tr");
+};
