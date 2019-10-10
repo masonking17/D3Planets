@@ -20,7 +20,7 @@ var pAppend = function(d){
 };
 pAppend(Names);
 
-var planetPromise=d3.json("planets.json");
+var planetPromise=d3.json("https://masonking17.github.io/D3Planets/planets.json");
 
 planetPromise.then(
 function(d)
@@ -28,6 +28,7 @@ function(d)
     drawPlanets(d);
     planetNames(d);
     makeTable(d);
+    
     console.log("works", d);
     
 },
@@ -66,6 +67,21 @@ var planetNames = function (d) {
 };
 
 var makeTable = function (d){
-    d3.select("#C1").append("table").attr("id", "elementTable");
-    d3.select("#elementTable").selectAll("tr").data(d).enter().append("tr");
+    d3.select("#C1")
+        .append("table")
+        .attr("id", "elementTable");
+    d3.select("#elementTable")
+    .selectAll("tr")
+        .data(d)
+        .enter()
+        .append("tr")
+        .attr("class", "nameColumn");
+     
+    d3.selectAll(".nameColumn")
+        .selectAll("td")
+        .data(d)
+        .enter()
+        .append("td")
+        .text(function(d){return d.name});
 };
+
